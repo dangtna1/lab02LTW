@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register Form</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form action="#" onSubmit="return check()">
+            First name:
+            <input type="text" name="firstname" id="firstname" value="">
+            <br><br>
+            Last name:
+            <input type="text" name="lastname" id="lastname" value="">
+            <br><br>
+            Email:
+            <input type="email" name="email" id="email" value="">
+            <br><br>
+            Password:
+            <input type="password" name="password" id="password" value="">
+            <br><br>
+            Birthday:
+            <select name="day" id="day">
+                <option value="" disabled selected>dd</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <select name="month" id="month">
+                <option value="" disabled selected>mm</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select name="year" id="year">
+                <option value="" disabled selected>yy</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="Other">Other</option>
+            </select>
+            <br><br>
+            <fieldset>
+                <legend>Gender:</legend>
+                <label for="nam">Nam</label>
+                    <input type="radio" name="Gender" value="nam">
+                <label for="nu">Nữ</label>
+                    <input type="radio" name="Gender" value="nu">
+                <label for="khong_xac_dinh">Không xác định</label>
+                    <input type="radio" name="Gender" value="khong_xac_dinh">
+            </fieldset>
+            <br><br>
+            Country:
+            <select name="Country" id="Country">
+                <option disabled selected value="">Select your country</option>
+                <option value="Vietnam">Vietnam</option>
+                <option value="Astralia">Astralia</option>
+                <option value="United States">United States</option>
+                <option value="India">India</option>
+                <option value="Other">Other</option>
+            </select>
+            <br><br>
+            About:
+            <textarea name="about" id="about" cols="20" rows="20"></textarea>
+            <br><br>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form>
+
+
+        <script>
+            function check() {
+                var firstname = document.getElementById('firstname').value;
+                var lastname = document.getElementById('lastname').value;
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                var options = document.getElementsByName('Gender');
+                var country = document.getElementById('Country').value;
+                var about = document.getElementById('about').value;
+                if (firstname.length<2 || firstname.length>30) {
+                    alert("First name: Nhap tu 2-30 ky tu");
+                    return false;
+                }
+                if (lastname.length<2 || lastname.length>30) {
+                    alert("Last name: Nhap tu 2-30 ky tu");
+                    return false;
+                }
+
+                //validate email
+
+                //validate password
+                if (password.length<2 || password.length>30) {
+                    alert("Password: Nhap tu 2-30 ky tu");
+                    return false;
+                }
+                //validate day month year
+                var day = document.getElementById('day').value;
+                if (day == "") {
+                    alert ("Birthday: Please select your day");
+                    return false;
+                }
+                var month = document.getElementById('month').value;
+                if (month == "") {
+                    alert ("Birthday: Please select your month");
+                    return false;
+                }
+                var year = document.getElementById('year').value;
+                if (year == "") {
+                    alert ("Birthday: Please select your year");
+                    return false;
+                }
+                //validate radios
+                var formValid = false;
+                var i = 0;
+                while (!formValid && i < options.length) {
+                    if (options[i].checked) formValid = true;
+                    i++;        
+                }
+                if (!formValid) {
+                    alert("Gender: Please select your gender");
+                    return false;
+                }
+
+                //validate Country
+                if (country == "") {
+                    alert("Country: Please select your country")
+                    return false;
+                }
+
+
+                //validate About
+                if (about.length>1000) {
+                    alert("About: Nhap toi da 1000 ky tu");
+                    return false;
+                }
+                alert ("Complete!");   
+                return true;
+            }
+        </script>
+    </body>
+</html>

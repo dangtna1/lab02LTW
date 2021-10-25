@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bai 2 cau 1</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <style>
+            table, td {
+                border: 2px solid black;
+                border-collapse: collapse;
+            }
+            .buttons-group {
+                margin: 20px;
+            }
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            #table-div {
+                width: 100%;
+                display: flex;
+                justify-content: center !important;
+            }
+
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="buttons-group">
+                <button type="button" class="btn btn-success" onClick="addTable();">Create a 2x2 tabel</button>
+                <button type="button" class="btn btn-primary" onClick="addRow();">Insert a row</button>
+                <button type="button" class="btn btn-primary" onClick="addColumn();">Insert a column</button>
+                <input type="text" id="user-input" placeholder="i" value="">
+                <button type="button" class="btn btn-light" onClick="removeRow();">Delete row i</button>
+                <button type="button" class="btn btn-light" onClick="removeColumn();">Delete column i</button>
+                <button type="button" class="btn btn-danger" onClick="removeAll();">Delete the table</button>
+            </div>
+            
+            <div id="table-div"><table id="mainTable"></table></div>
+        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>  
+            <script type="text/javascript">
+                function addTable() {
+                    //access the element wanna insert the table
+                    var myTable = document.getElementById("mainTable");
+                    //create a variable table
+                    var tb1 = document.createElement("table");
+                    // create a varible table body
+                    tb1.setAttribute("id", "subTable");
+                    var tb1Body = document.createElement("tbody");
+                    //create cells 
+                    for (var i=0; i<2; i++) {
+                        //create row
+                        var row = document.createElement("tr");
+                        //create cells
+                        for (var j=0; j<2; j++) {
+                            //create Cells
+                            var cell = document.createElement("td");
+                            var cellText = document.createTextNode("data");
+                            cell.appendChild(cellText);
+                            row.appendChild(cell);
+                        }
+                        tb1Body.appendChild(row);
+                    }
+                    tb1.appendChild(tb1Body);
+                    myTable.appendChild(tb1);
+                }
+
+
+                function addRow(){
+                    var root=document.getElementById('subTable').getElementsByTagName('tbody')[0];
+                    var rows=root.getElementsByTagName('tr');
+                    var clone=cloneEl(rows[rows.length-1]);
+                    root.appendChild(clone);
+                }
+                function removeAll() {
+                    var myTable = document.getElementById("mainTable");
+                    var tb1 = document.getElementById("subTable");
+                    myTable.removeChild(tb1);
+                }
+                function addColumn(){
+                    var rows=document.getElementById("subTable").getElementsByTagName('tr'); 
+                    var i=0, r, c, clone;
+                    for (let i=0; i<rows.length; i++) {
+                        r=rows[i];
+                        c=r.getElementsByTagName('td');
+                        clone=cloneEl(c[c.length-1]);
+                        c[0].parentNode.appendChild(clone);
+                    }
+                }
+                function cloneEl(el){
+                    var clo=el.cloneNode(true);
+                    return clo;
+                }
+                //delete a row
+                function removeRow() {
+                    var row = parseInt(document.getElementById("user-input").value);
+                    if (isNaN(row)) {
+                        alert("Nhập chỉ số dòng muốn xóa");
+                    }
+                    else {
+                        document.getElementById("subTable").deleteRow(row-1);
+                    }
+                }
+                //delete a column
+                function removeColumn() {
+                    var column = parseInt(document.getElementById("user-input").value);
+                    if (isNaN(column)) {
+                        alert("Nhập chỉ số cột muốn xóa");
+                    }
+                    else {
+                        var tb1 = document.getElementById('subTable');
+                        var row = tb1.rows; 
+                        for (var i = 0; i < row.length; i++) {
+                            row[i].deleteCell(column-1);
+                        }
+                    }
+                }
+            </script>
+        </main>
+    </body>
+</html>
